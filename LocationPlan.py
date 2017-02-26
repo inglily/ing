@@ -4,6 +4,7 @@ import json
 import os
 
 import sys
+import urllib2
 
 import chardet
 import unirest
@@ -13,7 +14,7 @@ from Utils.HttpUtils import post_json
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
-os.environ['NLS_LANG'] = 'SIMPLEFIED CHINESE_CHINA.UTF8'
+os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
 
 
 def get_location():
@@ -39,14 +40,27 @@ def get_geocoding():
     cinema_lists = get_location()
     print cinema_lists
     for cinema_loc in cinema_lists:
-        # locs_geocoding = post_json(config.geocoding_url, cinema_loc)
         url = config.geocoding_url + cinema_loc
-        locs_geocoding = post_json(url, cinema_loc)
-        print url
-        prov_result = unirest.post(url)
-        # print locs_geocoding
-        body = json.loads(prov_result.raw_body)
-        # print body
+        prov_result = urllib2.urlopen(url).read()
+        body = eval(prov_result)
+        geocodes_list = body['geocodes'][0]
+        location = geocodes_list['location']
+        print location
+
+
+def get_transit():
+    """
+    计算两个地理位置之间的交通方式
+    :return:
+    """
+    origin = '116.481028,39.989643'
+    destination = '116.419034,40.033411'
+    transit_url = config.transit_url + 'origin=' + origin + '&destination=' + destination
+    transit = urllib2.urlopen(transit_url).read()
+    print transit
+
+
 if __name__ == '__main__':
-    get_geocoding()
+    # get_geocoding()
     # get_location()
+    get_transit()
