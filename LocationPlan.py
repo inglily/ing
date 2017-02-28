@@ -59,6 +59,16 @@ def get_transit():
     transit = urllib2.urlopen(transit_url).read()
     print transit
 
+def input_tip(addr):
+    """
+    输入提示
+    :return:
+    """
+    input_tip_url = config.input_tip + addr
+    input_tip = urllib2.urlopen(input_tip_url).read()
+    return input_tip
+
+
 
 if __name__ == '__main__':
     # get_geocoding()
