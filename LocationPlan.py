@@ -65,6 +65,7 @@ def input_tip(addr):
     :return:
     """
     input_tip_url = config.input_tip + addr
+    print input_tip_url
     input_tip = urllib2.urlopen(input_tip_url).read()
     return input_tip
 
@@ -73,4 +74,7 @@ def input_tip(addr):
 if __name__ == '__main__':
     # get_geocoding()
     # get_location()
-    get_transit()
+    # get_transit()
+    input_tip('益园')
+
+

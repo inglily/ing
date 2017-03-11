@@ -66,8 +66,8 @@
     <!--</form>-->
     <div class="control-entry">
         <label>选择你所在地点：</label>
-        <div class="control-input">
-            <input id="work-location" type="text">
+        <div  class="control-input">
+            <input id="work-location" type="text" >
         </div>
     </div>
     <div class="control-entry">
@@ -182,7 +182,7 @@
         });
         geocoder.getLocation(address, function(status, result) {
             if (status === "complete" && result.info === 'OK') {
-                var geocode = result.geocodes[0];
+                    var geocode = result.geocodes[0];
                 rentMarker = new AMap.Marker({
                     map: map,
                     title: address,
@@ -198,7 +198,8 @@
                     infoWindow.setContent(e.target.content);
                     //在标记的位置打开窗体
                     infoWindow.open(map, e.target.getPosition());
-                    if (amapTransfer) amapTransfer.clear();
+                    if (amapTransfer)
+                        amapTransfer.clear();
                     amapTransfer = new AMap.Transfer({
                         map: map,
                         policy: AMap.TransferPolicy.LEAST_TIME,
